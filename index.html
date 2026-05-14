@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DataX - Dữ Liệu Doanh Nghiệp Việt Nam</title>
     <style>
-        :root { --primary: #2563eb; --primary-dark: #1d4ed8; --bg: #f8fafc; --card: #ffffff; --text: #1e293b; }
+        :root { --primary: #2563eb; --primary-dark: #1d4ed8; --accent: #f59e0b; --bg: #f8fafc; --card: #ffffff; --text: #1e293b; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
@@ -25,7 +25,7 @@
         .section { padding: 50px 0; }
         .section-title { font-size: 1.6em; font-weight: 600; margin-bottom: 30px; text-align: center; }
         .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; }
-        .product { background: var(--card); border-radius: 12px; padding: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; transition: transform 0.2s, box-shadow 0.2s; }
+        .product { background: var(--card); border-radius: 12px; padding: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
         .product:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         .product .icon { font-size: 2em; margin-bottom: 10px; }
         .product h3 { font-size: 1.15em; margin-bottom: 8px; }
@@ -33,24 +33,53 @@
         .product .meta { font-size: 0.85em; color: #94a3b8; margin-bottom: 14px; }
         .product .price { font-size: 1.4em; font-weight: 700; color: var(--primary); }
         .product .price small { font-size: 0.6em; font-weight: 400; color: #94a3b8; }
-        .product .btn { display: inline-block; margin-top: 14px; padding: 10px 28px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 0.9em; transition: background 0.2s; }
+        .product .btn { display: inline-block; margin-top: 14px; padding: 10px 28px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 0.9em; transition: background 0.2s; border: none; cursor: pointer; }
         .product .btn:hover { background: var(--primary-dark); }
         .product.featured { border-color: var(--primary); border-width: 2px; position: relative; }
         .product.featured::before { content: 'PHỔ BIẾN'; position: absolute; top: -10px; right: 20px; background: var(--primary); color: white; font-size: 0.7em; padding: 2px 12px; border-radius: 20px; font-weight: 600; letter-spacing: 0.5px; }
         .product .badge { display: inline-block; background: #fef3c7; color: #92400e; font-size: 0.75em; padding: 2px 8px; border-radius: 4px; font-weight: 500; margin-left: 8px; }
+        .product.selected { border-color: var(--primary); border-width: 2px; background: #eff6ff; }
 
-        /* How it Works / Payment */
+        /* Steps */
         .steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; margin-top: 30px; }
         .step { background: var(--card); border-radius: 12px; padding: 24px; text-align: center; border: 1px solid #e2e8f0; }
         .step-number { width: 36px; height: 36px; line-height: 36px; border-radius: 50%; background: var(--primary); color: white; font-weight: 700; font-size: 0.9em; margin: 0 auto 12px; }
         .step h4 { margin-bottom: 8px; }
         .step p { font-size: 0.9em; color: #64748b; }
 
-        /* Payment info box */
+        /* Order Form */
+        .order-section { background: white; padding: 50px 0; }
+        .order-form { max-width: 500px; margin: 0 auto; background: var(--card); border-radius: 16px; padding: 30px; border: 1px solid #e2e8f0; display: none; }
+        .order-form.active { display: block; }
+        .order-form h3 { margin-bottom: 20px; text-align: center; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-weight: 500; margin-bottom: 4px; font-size: 0.9em; color: #475569; }
+        .form-group input, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1em; transition: border 0.2s; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .submit-btn { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 1.1em; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .submit-btn:hover { background: var(--primary-dark); }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* Order Confirmation */
+        .order-confirm { max-width: 500px; margin: 0 auto; background: var(--card); border-radius: 16px; padding: 30px; border: 1px solid #e2e8f0; display: none; text-align: center; }
+        .order-confirm.active { display: block; }
+        .order-confirm .check { font-size: 3em; color: #22c55e; margin-bottom: 10px; }
+        .order-confirm h3 { margin-bottom: 8px; }
+        .order-confirm .order-id { font-size: 1.6em; font-weight: 700; color: var(--primary); letter-spacing: 2px; margin: 10px 0; }
+        .order-confirm .detail { font-size: 0.95em; color: #64748b; margin: 16px 0; }
+        .order-confirm .payment-info { background: #f8fafc; border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .order-confirm .payment-info img { width: 180px; height: 180px; border-radius: 12px; margin-bottom: 10px; }
+
+        /* Payment box */
         .payment-box { background: var(--card); border-radius: 12px; padding: 30px; margin-top: 30px; text-align: center; border: 2px dashed #2563eb; }
-        .payment-box h3 { margin-bottom: 10px; }
-        .payment-box .bank { font-size: 1.1em; font-weight: 600; }
-        .payment-box .note { font-size: 0.85em; color: #64748b; margin-top: 8px; }
+
+        /* Product selector for order form */
+        .product-selector { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
+        .product-option { padding: 8px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 0.85em; transition: all 0.2s; }
+        .product-option:hover { border-color: var(--primary); }
+        .product-option.selected { border-color: var(--primary); background: #eff6ff; font-weight: 600; }
+        .product-option .opt-price { display: block; color: var(--primary); font-weight: 700; margin-top: 2px; }
 
         /* Footer */
         footer { background: #1e293b; color: #94a3b8; text-align: center; padding: 30px 0; font-size: 0.9em; margin-top: 60px; }
@@ -59,6 +88,7 @@
             header h1 { font-size: 1.8em; }
             .stats { gap: 20px; }
             .products { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -84,40 +114,123 @@
     <div class="container">
         <h2 class="section-title">📦 Sản phẩm của chúng tôi</h2>
         <div class="products">
-            <div class="product featured">
+            <div class="product featured" onclick="selectProduct('full', '20,000+ Doanh Nghiệp IT TP.HCM', 500000)">
                 <div class="icon">🏢</div>
                 <h3>20,000+ Doanh Nghiệp IT TP.HCM</h3>
                 <div class="desc">Toàn bộ danh sách doanh nghiệp ngành Công nghệ Thông tin đang hoạt động tại TP.HCM. File CSV sạch, có mã số thuế, địa chỉ, quận/huyện, ngành nghề.</div>
                 <div class="meta">📋 Mã số thuế • Tên công ty • Địa chỉ • Quận/Huyện • Ngành nghề</div>
                 <div class="price">500,000₫ <small>/ 1 lần</small></div>
-                <a class="btn" href="#payment">Mua ngay</a>
+                <button class="btn">Mua ngay</button>
             </div>
 
-            <div class="product">
+            <div class="product" onclick="selectProduct('district', 'Theo Quận / Huyện', 300000)">
                 <div class="icon">📍</div>
                 <h3>Theo Quận / Huyện</h3>
                 <div class="desc">Danh sách IT theo từng quận cụ thể. Mua quận nào lấy quận đó — phù hợp nếu bạn chỉ cần 1-2 khu vực.</div>
                 <div class="meta">🗺️ Có sẵn: Quận 1, 3, 7, 10, 12, Bình Thạnh, Tân Bình, Gò Vấp...</div>
                 <div class="price">300,000₫ <small>/ quận</small></div>
-                <a class="btn" href="#payment">Mua ngay</a>
+                <button class="btn">Mua ngay</button>
             </div>
 
-            <div class="product">
+            <div class="product" onclick="selectProduct('industry', 'Theo Ngành IT', 300000)">
                 <div class="icon">🔌</div>
                 <h3>Theo Ngành IT</h3>
                 <div class="desc">Lọc theo lĩnh vực cụ thể: Lập trình, Mạng, Phần mềm, Viễn thông, Máy tính, Điện tử... File riêng từng ngành.</div>
                 <div class="meta">📂 Lập trình • Mạng • Phần mềm • Viễn thông • CNTT • v.v.</div>
                 <div class="price">300,000₫ <small>/ ngành</small></div>
-                <a class="btn" href="#payment">Mua ngay</a>
+                <button class="btn">Mua ngay</button>
             </div>
 
-            <div class="product">
+            <div class="product" onclick="selectProduct('premium', 'Gói Cao Cấp — IT + Số Điện Thoại', 2000000)">
                 <div class="icon">🔮</div>
                 <h3>Gói Cao Cấp — IT + Số Điện Thoại <span class="badge">Pre-order</span></h3>
                 <div class="desc">20,000+ DN IT HCM kèm số điện thoại đã xác minh. Dữ liệu đang được cập nhật — đặt trước để nhận ưu đãi.</div>
                 <div class="meta">📞 Tên • Địa chỉ • Số điện thoại • Email (nếu có)</div>
                 <div class="price">2,000,000₫ <small>/ 1 lần</small></div>
-                <a class="btn" href="#payment" style="background: #64748b;">Đặt trước</a>
+                <button class="btn" style="background: #64748b;">Đặt trước</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ORDER FORM -->
+<div class="order-section" id="order-section">
+    <div class="container">
+        <!-- Form đặt hàng -->
+        <div class="order-form" id="orderForm">
+            <h3>🛒 Đặt hàng</h3>
+            
+            <div class="product-selector">
+                <div class="product-option" data-key="full" onclick="pickProduct('full', '20,000+ Doanh Nghiệp IT TP.HCM', 500000)">
+                    📦 Full Set
+                    <span class="opt-price">500K</span>
+                </div>
+                <div class="product-option" data-key="district" onclick="pickProduct('district', 'Theo Quận / Huyện', 300000)">
+                    📍 Theo Quận
+                    <span class="opt-price">300K</span>
+                </div>
+                <div class="product-option" data-key="industry" onclick="pickProduct('industry', 'Theo Ngành IT', 300000)">
+                    🔌 Theo Ngành
+                    <span class="opt-price">300K</span>
+                </div>
+                <div class="product-option" data-key="premium" onclick="pickProduct('premium', 'Gói Cao Cấp — IT + Số Điện Thoại', 2000000)">
+                    🔮 Pre-order
+                    <span class="opt-price">2.000K</span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Họ và tên *</label>
+                    <input type="text" id="custName" placeholder="Nguyễn Văn A" required>
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại *</label>
+                    <input type="tel" id="custPhone" placeholder="0909123456" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email (để nhận file) *</label>
+                <input type="email" id="custEmail" placeholder="email@example.com" required>
+            </div>
+            <div class="form-group">
+                <label>Ghi chú (quận/ngành cụ thể nếu mua lẻ)</label>
+                <input type="text" id="custNote" placeholder="VD: Quận 1, Quận 3">
+            </div>
+
+            <div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 500;">Tạm tính:</span>
+                <span style="font-size: 1.3em; font-weight: 700; color: var(--primary);" id="orderTotal">0₫</span>
+            </div>
+
+            <button class="submit-btn" onclick="submitOrder()" id="submitBtn">🛒 Đặt hàng ngay</button>
+            <p style="text-align: center; font-size: 0.85em; color: #94a3b8; margin-top: 10px;">Bạn sẽ được chuyển đến hướng dẫn thanh toán</p>
+        </div>
+
+        <!-- Xác nhận đơn hàng -->
+        <div class="order-confirm" id="orderConfirm">
+            <div class="check">✅</div>
+            <h3>Đặt hàng thành công!</h3>
+            <div class="detail">Mã đơn hàng của bạn:</div>
+            <div class="order-id" id="displayOrderId">DX-XXXXXX</div>
+            
+            <div class="payment-info">
+                <img src="momo_qr.png" alt="Momo QR">
+                <div style="font-size: 1.1em; font-weight: 600;">📲 Momo: <strong>0977 316 969</strong></div>
+                <div style="font-size: 0.85em; color: #64748b; margin-top: 8px;">
+                    ✍️ Nội dung CK: <strong style="color: var(--primary);" id="displayTransferContent">FULL_0909123456</strong>
+                </div>
+            </div>
+
+            <div class="detail" style="text-align: left; background: #fff7ed; border-radius: 8px; padding: 14px; border: 1px solid #fed7aa;">
+                <strong>📌 Các bước tiếp theo:</strong>
+                <ol style="margin-top: 8px; padding-left: 20px; font-size: 0.9em;">
+                    <li>Chuyển khoản đúng số tiền qua <strong>Momo</strong></li>
+                    <li>Sao chép <strong>đúng nội dung</strong> ghi chú ở trên</li>
+                    <li>Chụp màn hình giao dịch</li>
+                    <li>Gửi ảnh + mã đơn hàng qua <strong>Zalo 0977 316 969</strong></li>
+                    <li>Nhận file trong <strong>3 phút</strong> qua email 📬</li>
+                </ol>
             </div>
         </div>
     </div>
@@ -134,13 +247,18 @@
             </div>
             <div class="step">
                 <div class="step-number">2</div>
-                <h4>Chuyển khoản</h4>
-                <p>Chuyển tiền đến tài khoản bên dưới, ghi rõ nội dung: "HoTen_SDT_SP"</p>
+                <h4>Nhận mã đơn</h4>
+                <p>Hệ thống tạo mã đơn hàng riêng — dùng để đối soát thanh toán</p>
             </div>
             <div class="step">
                 <div class="step-number">3</div>
+                <h4>Thanh toán</h4>
+                <p>Chuyển khoản Momo với nội dung ghi mã đơn hàng</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
                 <h4>Nhận file</h4>
-                <p>Sau khi xác nhận thanh toán, file CSV sẽ được gửi qua Zalo/Email trong 3 phút</p>
+                <p>Sau khi xác nhận thanh toán, file CSV gửi qua email trong 3 phút</p>
             </div>
         </div>
 
@@ -150,19 +268,19 @@
                 <img src="momo_qr.png" alt="Momo QR" style="width:200px; height:200px; border-radius:12px; margin-bottom:10px;">
             </div>
             <div class="bank">📲 Momo: <strong>0977 316 969</strong></div>
-            <div class="note" style="margin-top:4px;">✍️ Nội dung CK: <strong>[Tên_SP]_[SĐT]</strong> — VD: FULL_0909123456</div>
-            <div class="note" style="margin-top:4px;">✅ Sau khi thanh toán, gửi ảnh xác nhận qua Zalo: <strong>0977 316 969</strong> — Nhận file trong 3 phút</div>
+            <div class="note" style="margin-top:4px; font-size:0.9em; color: #64748b;">✍️ Nội dung CK: <strong>[Mã đơn hàng]_[SĐT]</strong></div>
+            <div class="note" style="margin-top:4px;">✅ Sau khi thanh toán, gửi ảnh xác nhận qua <strong>Zalo 0977 316 969</strong> kèm mã đơn hàng — Nhận file trong 3 phút</div>
         </div>
     </div>
 </div>
 
 <div class="section" style="background: white;">
     <div class="container">
-        <h2 class="section-title">🤔 FAQ — Câu hỏi thường gặp</h2>
+        <h2 class="section-title">❓ Câu hỏi thường gặp</h2>
         <div style="max-width: 700px; margin: 0 auto;">
             <p><strong>❓ Dữ liệu có cập nhật không?</strong><br>✅ Có, dữ liệu được lấy từ cổng đăng ký doanh nghiệp quốc gia tháng 2026.</p>
             <p style="margin-top:16px;"><strong>❓ File CSV có thể mở bằng gì?</strong><br>✅ Excel, Google Sheets, Numbers, hoặc bất kỳ phần mềm nào hỗ trợ CSV.</p>
-            <p style="margin-top:16px;"><strong>❓ Có được hoàn tiền không?</strong><br>✅ Có, nếu dữ liệu không đúng như mô tả. Chúng tôi muốn bạn hài lòng.</p>
+            <p style="margin-top:16px;"><strong>❓ Có được hoàn tiền không?</strong><br>✅ Có, nếu dữ liệu không đúng như mô tả.</p>
             <p style="margin-top:16px;"><strong>❓ Có thể đặt data theo yêu cầu không?</strong><br>✅ Có! Bạn cần ngành nào, khu vực nào? Liên hệ Zalo để được báo giá.</p>
         </div>
     </div>
@@ -175,6 +293,113 @@
         <p style="margin-top:4px; font-size:0.8em;">&copy; 2026 DataX. All rights reserved.</p>
     </div>
 </footer>
+
+<script>
+// State
+let selectedProduct = { key: 'full', name: '20,000+ Doanh Nghiệp IT TP.HCM', price: 500000 };
+
+function selectProduct(key, name, price) {
+    selectedProduct = { key, name, price };
+    
+    // Scroll to order section
+    document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
+    
+    // Show form
+    document.getElementById('orderForm').classList.add('active');
+    document.getElementById('orderConfirm').classList.remove('active');
+    
+    // Update product selector
+    document.querySelectorAll('.product-option').forEach(el => {
+        el.classList.toggle('selected', el.dataset.key === key);
+    });
+    
+    updateTotal();
+}
+
+function pickProduct(key, name, price) {
+    selectedProduct = { key, name, price };
+    
+    document.querySelectorAll('.product-option').forEach(el => {
+        el.classList.toggle('selected', el.dataset.key === key);
+    });
+    
+    updateTotal();
+}
+
+function updateTotal() {
+    document.getElementById('orderTotal').textContent = selectedProduct.price.toLocaleString('vi-VN') + '₫';
+}
+
+function generateOrderCode() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = 'DX-';
+    for (let i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+}
+
+function submitOrder() {
+    const name = document.getElementById('custName').value.trim();
+    const phone = document.getElementById('custPhone').value.trim();
+    const email = document.getElementById('custEmail').value.trim();
+    const note = document.getElementById('custNote').value.trim();
+    const btn = document.getElementById('submitBtn');
+    
+    if (!name || !phone || !email) {
+        alert('Vui lòng điền đầy đủ họ tên, SĐT và email!');
+        return;
+    }
+    if (phone.length < 10) {
+        alert('Số điện thoại không hợp lệ!');
+        return;
+    }
+    if (!email.includes('@')) {
+        alert('Email không hợp lệ!');
+        return;
+    }
+    
+    btn.disabled = true;
+    btn.textContent = '⏳ Đang xử lý...';
+    
+    // Generate order code (offline, no server needed)
+    const orderId = generateOrderCode();
+    const transferContent = `${selectedProduct.key.toUpperCase()}_${phone}`;
+    
+    // Save to localStorage for tracking
+    const orders = JSON.parse(localStorage.getItem('datax_orders') || '[]');
+    orders.push({
+        orderId,
+        product: selectedProduct.name,
+        price: selectedProduct.price,
+        name,
+        phone,
+        email,
+        note,
+        transferContent,
+        createdAt: new Date().toISOString(),
+        status: 'pending'
+    });
+    localStorage.setItem('datax_orders', JSON.stringify(orders));
+    
+    // Auto-fill Zalo deep link with order info
+    const zaloMsg = encodeURIComponent(`DataX - Đơn hàng ${orderId}\nSản phẩm: ${selectedProduct.name}\nTổng: ${selectedProduct.price.toLocaleString('vi-VN')}₫\nHọ tên: ${name}\nSĐT: ${phone}\nEmail: ${email}\nĐã chuyển khoản!`);
+    
+    // Show confirmation
+    document.getElementById('orderForm').classList.remove('active');
+    document.getElementById('orderConfirm').classList.add('active');
+    document.getElementById('displayOrderId').textContent = orderId;
+    document.getElementById('displayTransferContent').textContent = transferContent;
+    
+    btn.disabled = false;
+    btn.textContent = '🛒 Đặt hàng ngay';
+    
+    // Scroll to confirmation
+    document.getElementById('orderConfirm').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Init: form ẩn, chỉ hiện khi click "Mua ngay"
+</script>
 
 </body>
 </html>
