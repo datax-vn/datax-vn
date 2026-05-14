@@ -1,0 +1,79 @@
+{
+  "products": [
+    {
+      "name": "📦 Gói Cơ Bản — 20,000+ IT HCMC",
+      "filename": "it_businesses_hcmc_full.csv",
+      "price": "500,000 VND",
+      "price_num": 500000,
+      "records": 20267,
+      "description": "Toàn bộ danh sách doanh nghiệp ngành IT tại TP.HCM. File CSV sạch, có mã số thuế, địa chỉ, ngành nghề."
+    },
+    {
+      "name": "📦 Gói Theo Quận — IT HCMC",
+      "filename": "by_district/ (nhiều files)",
+      "price": "300,000 VND / quận",
+      "price_num": 300000,
+      "records": 20267,
+      "description": "Danh sách IT theo từng quận/huyện. Mua quận nào lấy quận đó."
+    },
+    {
+      "name": "📦 Gói Theo Ngành — IT HCMC",
+      "filename": "by_industry/ (nhiều files)",
+      "price": "300,000 VND / ngành",
+      "price_num": 300000,
+      "records": 20267,
+      "description": "Danh sách IT theo ngành cụ thể (lập trình, viễn thông, phần mềm...)"
+    },
+    {
+      "name": "🔮 Gói Cao Cấp — Có số điện thoại (pre-order)",
+      "filename": "TBA",
+      "price": "2,000,000 VND",
+      "price_num": 2000000,
+      "records": 0,
+      "description": "20,000+ IT HCMC + số điện thoại đã xác minh. (Đang mining...)"
+    }
+  ],
+  "total_records": 20267,
+  "districts_available": [
+    "Quận Bình Thạnh",
+    "Quận 6",
+    "Quận 5",
+    "Quận Gò Vấp",
+    "Quận 1",
+    "Quận 4",
+    "Quận Tân phú",
+    "",
+    "Quận Tân Bình",
+    "Quận Tân Phú",
+    "Quận 10",
+    "Quận 7",
+    "Quận 3",
+    "Quận 12",
+    "Quận Thủ Đức",
+    "Quận Bình Tân",
+    "Quận Phú Nhuận",
+    "Quận 8",
+    "Quận 2",
+    "Quận 9"
+  ],
+  "industries_available": [
+    "internet",
+    "lap top",
+    "software",
+    "hardware",
+    "technology",
+    "network",
+    "may in",
+    "telecom",
+    "it solution",
+    "computer",
+    "vi tinh",
+    "cntt",
+    "it services",
+    "electronic",
+    "may photo",
+    "tin hoc",
+    "dien tu",
+    "lap trinh"
+  ]
+}
