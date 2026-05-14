@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataX - Dữ Liệu Doanh Nghiệp Việt Nam</title>
+    <style>
+        :root { --primary: #2563eb; --primary-dark: #1d4ed8; --bg: #f8fafc; --card: #ffffff; --text: #1e293b; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header */
+        header { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); color: white; padding: 60px 0; text-align: center; }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        header p { font-size: 1.15em; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+        /* Stats */
+        .stats { display: flex; justify-content: center; gap: 40px; padding: 40px 0; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-number { font-size: 2em; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 0.9em; color: #64748b; margin-top: 4px; }
+
+        /* Products */
+        .section { padding: 50px 0; }
+        .section-title { font-size: 1.6em; font-weight: 600; margin-bottom: 30px; text-align: center; }
+        .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; }
+        .product { background: var(--card); border-radius: 12px; padding: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; transition: transform 0.2s, box-shadow 0.2s; }
+        .product:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .product .icon { font-size: 2em; margin-bottom: 10px; }
+        .product h3 { font-size: 1.15em; margin-bottom: 8px; }
+        .product .desc { font-size: 0.9em; color: #64748b; margin-bottom: 12px; }
+        .product .meta { font-size: 0.85em; color: #94a3b8; margin-bottom: 14px; }
+        .product .price { font-size: 1.4em; font-weight: 700; color: var(--primary); }
+        .product .price small { font-size: 0.6em; font-weight: 400; color: #94a3b8; }
+        .product .btn { display: inline-block; margin-top: 14px; padding: 10px 28px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 0.9em; transition: background 0.2s; }
+        .product .btn:hover { background: var(--primary-dark); }
+        .product.featured { border-color: var(--primary); border-width: 2px; position: relative; }
+        .product.featured::before { content: 'PHỔ BIẾN'; position: absolute; top: -10px; right: 20px; background: var(--primary); color: white; font-size: 0.7em; padding: 2px 12px; border-radius: 20px; font-weight: 600; letter-spacing: 0.5px; }
+        .product .badge { display: inline-block; background: #fef3c7; color: #92400e; font-size: 0.75em; padding: 2px 8px; border-radius: 4px; font-weight: 500; margin-left: 8px; }
+
+        /* How it Works / Payment */
+        .steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; margin-top: 30px; }
+        .step { background: var(--card); border-radius: 12px; padding: 24px; text-align: center; border: 1px solid #e2e8f0; }
+        .step-number { width: 36px; height: 36px; line-height: 36px; border-radius: 50%; background: var(--primary); color: white; font-weight: 700; font-size: 0.9em; margin: 0 auto 12px; }
+        .step h4 { margin-bottom: 8px; }
+        .step p { font-size: 0.9em; color: #64748b; }
+
+        /* Payment info box */
+        .payment-box { background: var(--card); border-radius: 12px; padding: 30px; margin-top: 30px; text-align: center; border: 2px dashed #2563eb; }
+        .payment-box h3 { margin-bottom: 10px; }
+        .payment-box .bank { font-size: 1.1em; font-weight: 600; }
+        .payment-box .note { font-size: 0.85em; color: #64748b; margin-top: 8px; }
+
+        /* Footer */
+        footer { background: #1e293b; color: #94a3b8; text-align: center; padding: 30px 0; font-size: 0.9em; margin-top: 60px; }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8em; }
+            .stats { gap: 20px; }
+            .products { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>📊 DataX</h1>
+        <p>Dữ liệu doanh nghiệp Việt Nam — sạch, cập nhật, sẵn sàng sử dụng</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="stats">
+        <div class="stat"><div class="stat-number">20,267+</div><div class="stat-label">Doanh nghiệp IT HCMC</div></div>
+        <div class="stat"><div class="stat-number">19</div><div class="stat-label">Quận/Huyện</div></div>
+        <div class="stat"><div class="stat-number">18</div><div class="stat-label">Ngành IT</div></div>
+        <div class="stat"><div class="stat-number">3 phút</div><div class="stat-label">Giao hàng tự động</div></div>
+    </div>
+</div>
+
+<div class="section" style="background: white;">
+    <div class="container">
+        <h2 class="section-title">📦 Sản phẩm của chúng tôi</h2>
+        <div class="products">
+            <div class="product featured">
+                <div class="icon">🏢</div>
+                <h3>20,000+ Doanh Nghiệp IT TP.HCM</h3>
+                <div class="desc">Toàn bộ danh sách doanh nghiệp ngành Công nghệ Thông tin đang hoạt động tại TP.HCM. File CSV sạch, có mã số thuế, địa chỉ, quận/huyện, ngành nghề.</div>
+                <div class="meta">📋 Mã số thuế • Tên công ty • Địa chỉ • Quận/Huyện • Ngành nghề</div>
+                <div class="price">500,000₫ <small>/ 1 lần</small></div>
+                <a class="btn" href="#payment">Mua ngay</a>
+            </div>
+
+            <div class="product">
+                <div class="icon">📍</div>
+                <h3>Theo Quận / Huyện</h3>
+                <div class="desc">Danh sách IT theo từng quận cụ thể. Mua quận nào lấy quận đó — phù hợp nếu bạn chỉ cần 1-2 khu vực.</div>
+                <div class="meta">🗺️ Có sẵn: Quận 1, 3, 7, 10, 12, Bình Thạnh, Tân Bình, Gò Vấp...</div>
+                <div class="price">300,000₫ <small>/ quận</small></div>
+                <a class="btn" href="#payment">Mua ngay</a>
+            </div>
+
+            <div class="product">
+                <div class="icon">🔌</div>
+                <h3>Theo Ngành IT</h3>
+                <div class="desc">Lọc theo lĩnh vực cụ thể: Lập trình, Mạng, Phần mềm, Viễn thông, Máy tính, Điện tử... File riêng từng ngành.</div>
+                <div class="meta">📂 Lập trình • Mạng • Phần mềm • Viễn thông • CNTT • v.v.</div>
+                <div class="price">300,000₫ <small>/ ngành</small></div>
+                <a class="btn" href="#payment">Mua ngay</a>
+            </div>
+
+            <div class="product">
+                <div class="icon">🔮</div>
+                <h3>Gói Cao Cấp — IT + Số Điện Thoại <span class="badge">Pre-order</span></h3>
+                <div class="desc">20,000+ DN IT HCM kèm số điện thoại đã xác minh. Dữ liệu đang được cập nhật — đặt trước để nhận ưu đãi.</div>
+                <div class="meta">📞 Tên • Địa chỉ • Số điện thoại • Email (nếu có)</div>
+                <div class="price">2,000,000₫ <small>/ 1 lần</small></div>
+                <a class="btn" href="#payment" style="background: #64748b;">Đặt trước</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">📌 Cách mua hàng</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h4>Chọn gói</h4>
+                <p>Chọn sản phẩm phù hợp với nhu cầu của bạn</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h4>Chuyển khoản</h4>
+                <p>Chuyển tiền đến tài khoản bên dưới, ghi rõ nội dung: "HoTen_SDT_SP"</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h4>Nhận file</h4>
+                <p>Sau khi xác nhận thanh toán, file CSV sẽ được gửi qua Zalo/Email trong 3 phút</p>
+            </div>
+        </div>
+
+        <div id="payment" class="payment-box">
+            <h3>💳 Thông tin thanh toán</h3>
+            <div class="bank" style="font-size:1.3em;">
+                <img src="momo_qr.png" alt="Momo QR" style="width:200px; height:200px; border-radius:12px; margin-bottom:10px;">
+            </div>
+            <div class="bank">📲 Momo: <strong>0977 316 969</strong></div>
+            <div class="note" style="margin-top:4px;">✍️ Nội dung CK: <strong>[Tên_SP]_[SĐT]</strong> — VD: FULL_0909123456</div>
+            <div class="note" style="margin-top:4px;">✅ Sau khi thanh toán, gửi ảnh xác nhận qua Zalo: <strong>0977 316 969</strong> — Nhận file trong 3 phút</div>
+        </div>
+    </div>
+</div>
+
+<div class="section" style="background: white;">
+    <div class="container">
+        <h2 class="section-title">🤔 FAQ — Câu hỏi thường gặp</h2>
+        <div style="max-width: 700px; margin: 0 auto;">
+            <p><strong>❓ Dữ liệu có cập nhật không?</strong><br>✅ Có, dữ liệu được lấy từ cổng đăng ký doanh nghiệp quốc gia tháng 2026.</p>
+            <p style="margin-top:16px;"><strong>❓ File CSV có thể mở bằng gì?</strong><br>✅ Excel, Google Sheets, Numbers, hoặc bất kỳ phần mềm nào hỗ trợ CSV.</p>
+            <p style="margin-top:16px;"><strong>❓ Có được hoàn tiền không?</strong><br>✅ Có, nếu dữ liệu không đúng như mô tả. Chúng tôi muốn bạn hài lòng.</p>
+            <p style="margin-top:16px;"><strong>❓ Có thể đặt data theo yêu cầu không?</strong><br>✅ Có! Bạn cần ngành nào, khu vực nào? Liên hệ Zalo để được báo giá.</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>📊 DataX — Dữ Liệu Doanh Nghiệp Việt Nam</p>
+        <p style="margin-top:4px;">Zalo: 0977 316 969 | Dữ liệu được cập nhật định kỳ</p>
+        <p style="margin-top:4px; font-size:0.8em;">&copy; 2026 DataX. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
